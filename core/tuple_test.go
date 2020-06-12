@@ -86,3 +86,46 @@ func TestSubtractingTwoPoints(t *testing.T) {
 		t.Fatalf("expected=%v. got=%v", expected, actual)
 	}
 }
+
+func TestSubtractingVectorFromPoint(t *testing.T) {
+	p := NewPoint(3, 2, 1)
+	v := NewVector(5, 6, 7)
+	actual := p.Minus(v)
+	expected := NewPoint(-2, -4, -6)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestSubtractingTwoVectors(t *testing.T) {
+	v1 := NewVector(3, 2, 1)
+	v2 := NewVector(5, 6, 7)
+	actual := v1.Minus(v2)
+	expected := NewVector(-2, -4, -6)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestSubtractingVectorFromZeroVector(t *testing.T) {
+	zero := NewVector(0, 0, 0)
+	v := NewVector(1, -2, 3)
+	actual := zero.Minus(v)
+	expected := NewVector(-1, 2, -3)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestNegatingTuple(t *testing.T) {
+	a := NewTuple4(1, -2, 3, -4)
+	actual := a.Negate()
+	expected := NewTuple4(-1, 2, -3, 4)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}

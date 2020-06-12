@@ -54,3 +54,7 @@ func (t Tuple4) Plus(other Tuple4) Tuple4 {
 func (t Tuple4) Minus(other Tuple4) Tuple4 {
 	return NewTuple4(t.x-other.x, t.y-other.y, t.z-other.z, t.w-other.w)
 }
+
+func (t Tuple4) Negate() Tuple4 {
+	return NewTuple4(-t.x, -t.y, -t.z, -t.w)
+}
