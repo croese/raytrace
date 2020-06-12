@@ -75,3 +75,14 @@ func TestAddingTwoTuples(t *testing.T) {
 		t.Fatalf("expected=%v. got=%v", expected, actual)
 	}
 }
+
+func TestSubtractingTwoPoints(t *testing.T) {
+	p1 := NewPoint(3, 2, 1)
+	p2 := NewPoint(5, 6, 7)
+	actual := p1.Minus(p2)
+	expected := NewVector(-2, -4, -6)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
