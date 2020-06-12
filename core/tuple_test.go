@@ -1,6 +1,8 @@
 package core
 
-import "testing"
+import (
+	"testing"
+)
 
 func verifyFloat(expected, actual float64, t *testing.T) {
 	if !compareFloat64s(expected, actual) {
@@ -55,5 +57,21 @@ func TestNewVectorCreatesVectorTuple(t *testing.T) {
 	expected := NewTuple4(4, -4, 3, 0)
 	if !p.Equals(expected) {
 		t.Fatalf("expected=%v. got=%v", expected, p)
+	}
+}
+
+func TestAddingTwoTuples(t *testing.T) {
+	a1 := NewTuple4(3, -2, 5, 1)
+	a2 := NewTuple4(-2, 3, 1, 0)
+	actual := a1.Plus(a2)
+	expected := NewTuple4(1, 1, 6, 1)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+
+	actual = a2.Plus(a1)
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
 	}
 }

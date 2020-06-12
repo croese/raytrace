@@ -46,3 +46,7 @@ func (t Tuple4) Equals(other Tuple4) bool {
 		compareFloat64s(t.z, other.z) &&
 		compareFloat64s(t.w, other.w)
 }
+
+func (t Tuple4) Plus(other Tuple4) Tuple4 {
+	return NewTuple4(t.x+other.x, t.y+other.y, t.z+other.z, t.w+other.w)
+}
