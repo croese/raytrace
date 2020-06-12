@@ -233,3 +233,43 @@ func TestCrossProduct(t *testing.T) {
 		t.Fatalf("expected=%v. got=%v", expected, actual)
 	}
 }
+
+func TestColorTuple(t *testing.T) {
+	c := NewColor(-0.5, 0.4, 1.7)
+	verifyFloat(-0.5, c.Red(), t)
+	verifyFloat(0.4, c.Green(), t)
+	verifyFloat(1.7, c.Blue(), t)
+}
+
+func TestAddingColors(t *testing.T) {
+	c1 := NewColor(0.9, 0.6, 0.75)
+	c2 := NewColor(0.7, 0.1, 0.25)
+	actual := c1.Plus(c2)
+	expected := NewColor(1.6, 0.7, 1.0)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestSubtractingColors(t *testing.T) {
+	c1 := NewColor(0.9, 0.6, 0.75)
+	c2 := NewColor(0.7, 0.1, 0.25)
+	actual := c1.Minus(c2)
+	expected := NewColor(0.2, 0.5, 0.5)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestMultiplyingColors(t *testing.T) {
+	c1 := NewColor(1, 0.2, 0.4)
+	c2 := NewColor(0.9, 1, 0.1)
+	actual := c1.Times(c2)
+	expected := NewColor(0.9, 0.2, 0.04)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}

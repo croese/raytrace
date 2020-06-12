@@ -91,3 +91,24 @@ func (t Tuple4) Cross(other Tuple4) Tuple4 {
 		t.z*other.x-t.x*other.z,
 		t.x*other.y-t.y*other.x)
 }
+
+func NewColor(red, green, blue float64) Tuple4 {
+	return NewVector(red, green, blue)
+}
+
+func (t Tuple4) Red() float64 {
+	return t.x
+}
+
+func (t Tuple4) Green() float64 {
+	return t.y
+}
+
+func (t Tuple4) Blue() float64 {
+	return t.z
+}
+
+func (t Tuple4) Times(other Tuple4) Tuple4 {
+	return NewColor(t.Red()*other.Red(),
+		t.Green()*other.Green(), t.Blue()*other.Blue())
+}
