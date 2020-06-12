@@ -179,3 +179,57 @@ func TestVectorMagnitude(t *testing.T) {
 		}
 	}
 }
+
+func TestNormalizingVector(t *testing.T) {
+	v := NewVector(4, 0, 0)
+	actual := v.Normalize()
+	expected := NewVector(1, 0, 0)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+
+	v = NewVector(1, 2, 3)
+	actual = v.Normalize()
+	expected = NewVector(0.26726, 0.53452, 0.80178)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestMagnitudeOfNormalizedVector(t *testing.T) {
+	v := NewVector(1, 2, 3)
+	norm := v.Normalize()
+
+	if norm.Magnitude() != 1 {
+		t.Fatalf("expected magnitude to be 1. got=%v", norm.Magnitude())
+	}
+}
+
+func TestDotProduct(t *testing.T) {
+	a := NewVector(1, 2, 3)
+	b := NewVector(2, 3, 4)
+	actual := a.Dot(b)
+	expected := 20.0
+
+	verifyFloat(expected, actual, t)
+}
+
+func TestCrossProduct(t *testing.T) {
+	a := NewVector(1, 2, 3)
+	b := NewVector(2, 3, 4)
+	actual := a.Cross(b)
+	expected := NewVector(-1, 2, -1)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+
+	actual = b.Cross(a)
+	expected = NewVector(1, -2, 1)
+
+	if !actual.Equals(expected) {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}

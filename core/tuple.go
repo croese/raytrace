@@ -72,3 +72,22 @@ func (t Tuple4) Divide(by float64) Tuple4 {
 func (t Tuple4) Magnitude() float64 {
 	return math.Sqrt(t.x*t.x + t.y*t.y + t.z*t.z + t.w*t.w)
 }
+
+func (t Tuple4) Normalize() Tuple4 {
+	magnitude := t.Magnitude()
+	return NewTuple4(t.x/magnitude, t.y/magnitude,
+		t.z/magnitude, t.w/magnitude)
+}
+
+func (t Tuple4) Dot(other Tuple4) float64 {
+	return t.x*other.x +
+		t.y*other.y +
+		t.z*other.z +
+		t.w*other.w
+}
+
+func (t Tuple4) Cross(other Tuple4) Tuple4 {
+	return NewVector(t.y*other.z-t.z*other.y,
+		t.z*other.x-t.x*other.z,
+		t.x*other.y-t.y*other.x)
+}
