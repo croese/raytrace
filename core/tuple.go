@@ -1,5 +1,7 @@
 package core
 
+import "math"
+
 type Tuple4 struct {
 	x, y, z, w float64
 }
@@ -57,4 +59,16 @@ func (t Tuple4) Minus(other Tuple4) Tuple4 {
 
 func (t Tuple4) Negate() Tuple4 {
 	return NewTuple4(-t.x, -t.y, -t.z, -t.w)
+}
+
+func (t Tuple4) Scale(by float64) Tuple4 {
+	return NewTuple4(t.x*by, t.y*by, t.z*by, t.w*by)
+}
+
+func (t Tuple4) Divide(by float64) Tuple4 {
+	return NewTuple4(t.x/by, t.y/by, t.z/by, t.w/by)
+}
+
+func (t Tuple4) Magnitude() float64 {
+	return math.Sqrt(t.x*t.x + t.y*t.y + t.z*t.z + t.w*t.w)
 }

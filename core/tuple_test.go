@@ -1,6 +1,7 @@
 package core
 
 import (
+	"math"
 	"testing"
 )
 
@@ -127,5 +128,54 @@ func TestNegatingTuple(t *testing.T) {
 
 	if expected != actual {
 		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestScalarMultiplication(t *testing.T) {
+	a := NewTuple4(1, -2, 3, -4)
+	actual := a.Scale(3.5)
+	expected := NewTuple4(3.5, -7, 10.5, -14)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+
+	actual = a.Scale(0.5)
+	expected = NewTuple4(0.5, -1, 1.5, -2)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestScalarDivision(t *testing.T) {
+	a := NewTuple4(1, -2, 3, -4)
+	actual := a.Divide(2)
+	expected := NewTuple4(0.5, -1, 1.5, -2)
+
+	if expected != actual {
+		t.Fatalf("expected=%v. got=%v", expected, actual)
+	}
+}
+
+func TestVectorMagnitude(t *testing.T) {
+	tests := []struct {
+		x, y, z  float64
+		expected float64
+	}{
+		{1, 0, 0, 1},
+		{0, 1, 0, 1},
+		{0, 0, 1, 1},
+		{1, 2, 3, math.Sqrt(14)},
+		{-1, -2, -3, math.Sqrt(14)},
+	}
+
+	for i, tt := range tests {
+		v := NewVector(tt.x, tt.y, tt.z)
+		actual := v.Magnitude()
+		if tt.expected != actual {
+			t.Fatalf("magnitude tests[%d]: expected=%v. got=%v", i,
+				tt.expected, actual)
+		}
 	}
 }
