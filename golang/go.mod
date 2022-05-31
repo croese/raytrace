@@ -1,3 +1,3 @@
-module github.com/croese/raytrace/golang
+module github.com/croese/raytrace
 
 go 1.18
