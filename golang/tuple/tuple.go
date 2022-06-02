@@ -85,7 +85,7 @@ func (t Tuple4) Negate() Tuple4 {
 	}
 }
 
-func (t Tuple4) Times(scalar float64) Tuple4 {
+func (t Tuple4) ScalarMult(scalar float64) Tuple4 {
 	return Tuple4{
 		x: t.x * scalar,
 		y: t.y * scalar,
@@ -130,4 +130,30 @@ func (t Tuple4) Cross(b Tuple4) Tuple4 {
 	return Vector(t.y*b.z-t.z*b.y,
 		t.z*b.x-t.x*b.z,
 		t.x*b.y-t.y*b.x)
+}
+
+func Color(r, g, b float64) Tuple4 {
+	return Tuple4{
+		x: r,
+		y: g,
+		z: b,
+	}
+}
+
+func (t Tuple4) Red() float64 {
+	return t.x
+}
+
+func (t Tuple4) Green() float64 {
+	return t.y
+}
+
+func (t Tuple4) Blue() float64 {
+	return t.z
+}
+
+func (t Tuple4) ElementwiseMult(b Tuple4) Tuple4 {
+	return Color(t.Red()*b.Red(),
+		t.Green()*b.Green(),
+		t.Blue()*b.Blue())
 }

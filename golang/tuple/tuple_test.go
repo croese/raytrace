@@ -141,7 +141,7 @@ func TestOperations(t *testing.T) {
 		a := tuple.New(1, -2, 3, -4)
 
 		expected := tuple.New(3.5, -7, 10.5, -14)
-		actual := a.Times(3.5)
+		actual := a.ScalarMult(3.5)
 
 		checkTupleEquality(t, expected, actual)
 	})
@@ -150,7 +150,7 @@ func TestOperations(t *testing.T) {
 		a := tuple.New(1, -2, 3, -4)
 
 		expected := tuple.New(0.5, -1, 1.5, -2)
-		actual := a.Times(0.5)
+		actual := a.ScalarMult(0.5)
 
 		checkTupleEquality(t, expected, actual)
 	})
@@ -222,5 +222,51 @@ func TestNorm(t *testing.T) {
 		norm := v.Norm()
 
 		checkFloatValue(t, 1, norm.Magnitude())
+	})
+}
+
+func TestColors(t *testing.T) {
+	t.Run("ColorTuple", func(t *testing.T) {
+		c := tuple.Color(-0.5, 0.4, 1.7)
+
+		checkFloatValue(t, -0.5, c.Red())
+		checkFloatValue(t, 0.4, c.Green())
+		checkFloatValue(t, 1.7, c.Blue())
+	})
+
+	t.Run("Addition", func(t *testing.T) {
+		c1, c2 := tuple.Color(0.9, 0.6, 0.75), tuple.Color(0.7, 0.1, 0.25)
+
+		expected := tuple.Color(1.6, 0.7, 1.0)
+		actual := c1.Plus(c2)
+
+		checkTupleEquality(t, expected, actual)
+	})
+
+	t.Run("Subtraction", func(t *testing.T) {
+		c1, c2 := tuple.Color(0.9, 0.6, 0.75), tuple.Color(0.7, 0.1, 0.25)
+
+		expected := tuple.Color(0.2, 0.5, 0.5)
+		actual := c1.Minus(c2)
+
+		checkTupleEquality(t, expected, actual)
+	})
+
+	t.Run("ScalarMult", func(t *testing.T) {
+		c := tuple.Color(0.2, 0.3, 0.4)
+
+		expected := tuple.Color(0.4, 0.6, 0.8)
+		actual := c.ScalarMult(2)
+
+		checkTupleEquality(t, expected, actual)
+	})
+
+	t.Run("ElementwiseMult", func(t *testing.T) {
+		c1, c2 := tuple.Color(1, 0.2, 0.4), tuple.Color(0.9, 1, 0.1)
+
+		expected := tuple.Color(0.9, 0.2, 0.04)
+		actual := c1.ElementwiseMult(c2)
+
+		checkTupleEquality(t, expected, actual)
 	})
 }
